@@ -8,8 +8,8 @@ item1 = InlineKeyboardButton("Excel",callback_data="Excel")
 
 markupboshmenyu.add(item1)
 
-channel_name = "@test_pythonbotchannel" # kanalingiz useri
-bot = TeleBot("BOT_TOKEN")
+channel_name = "@test_pythonbotchannel"
+bot = TeleBot("1174492283:AAHaCNotofjka6RzPKSEGXMo5j_QW8xCfcs")
 
 def Excel_File_Name(message):
     data = message.text.split("$")
@@ -50,17 +50,21 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def text(message):
-    global file_name
-    if "/excel" in message.text:
-        bot.send_message(message.chat.id,"Tayyorlanmoqda...")
-        Excel(message.text,file_name)
-        bot.send_message(message.chat.id,"Tayyor!!!")
-        doc = open('./{0}.xlsx'.format(file_name), 'rb')
-        bot.send_document(message.chat.id,data=doc)
+    try:
+        global file_name
+        if "/excel" in message.text:
+            bot.send_message(message.chat.id,"Tayyorlanmoqda...")
+            Excel(message.text,file_name)
+            bot.send_message(message.chat.id,"Tayyor!!!")
+            doc = open('./{0}.xlsx'.format(file_name), 'rb')
+            bot.send_document(message.chat.id,data=doc)
         
-    if "/file_name" in message.text : 
-        file_name = Excel_File_Name(message) 
-        bot.send_message(message.chat.id,"Fayl Nomini Kiritildi!")
+        if "/file_name" in message.text : 
+            file_name = Excel_File_Name(message) 
+            bot.send_message(message.chat.id,"Fayl Nomini Kiritildi!")
+    except Exception as e:
+        bot.send_message(message.chat.id,"Xatolik yuz berdi ! Iltimos /start ni qaytadan bosing.")
+    
 
 @bot.callback_query_handler(func=lambda call: True)
 def call(call):
@@ -71,4 +75,4 @@ def call(call):
 
     
 
-bot.polling()
+bot.polling(none_stop=True)
