@@ -9,7 +9,7 @@ item1 = InlineKeyboardButton("Excel",callback_data="Excel")
 markupboshmenyu.add(item1)
 
 channel_name = "@test_pythonbotchannel"
-bot = TeleBot("1174492283:AAHaCNotofjka6RzPKSEGXMo5j_QW8xCfcs")
+bot = TeleBot("BOT_TOKEN")
 
 def Excel_File_Name(message):
     data = message.text.split("$")
